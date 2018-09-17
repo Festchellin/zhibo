@@ -25,7 +25,7 @@ public class UserRegisterController {
             modelAndView.addObject("nickName",userBean.getName());
             modelAndView.setViewName("index.html");
         }else {
-            modelAndView.addObject("status","登录失败");
+            modelAndView.addObject("status","注册失败");
             modelAndView.setViewName("index.html");
         }
         return modelAndView;
