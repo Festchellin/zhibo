@@ -6,17 +6,17 @@ package com.zhibo.org.zhibo.entity;
  */
 public class User {
     private Integer id;
-    private String name;
-    private String account;
-    private String password;
-    private String qqNum;
-    private String wechatNum;
-    private String email;
-    private String summary;
-    private String avatar;
-    private String phone;
-    private Integer state;
-    private Long bannedTime;
+    private String name;//用户昵称
+    private String account;//用户登录账号
+    private String password;//用户密码
+    private String qqNum;//qq登录后绑定用户账号 未实现
+    private String wechatNum;//微信登录后绑定用户账号 未实现
+    private String email;//用户邮箱 注册时验证 必填
+    private String summary;//用户简介，个性签名
+    private String avatar;//用户头像
+    private String phone;// 用户注册手机号   注册时必填
+    private Integer state;// 用户状态 [0 : 已删除,1 : 正常使用,2 : 已被封禁] 默认为1
+    private Long bannedTime;//封禁时间 无默认值
 
     public User() {
     }

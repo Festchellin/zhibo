@@ -2,7 +2,15 @@ package com.zhibo.org.zhibo.entity;
 
 import com.zhibo.org.zhibo.util.StringGenerator;
 
-public class Article {
+import java.util.List;
+
+/**
+ * @author dream
+ * @date 2018/09/17
+ *
+ * 文章实体类
+ */
+public class Article implements Voteable {
     private String id= StringGenerator.UUIDGenerator();//id
     private String title;//标题
     private String thumbnail;//文章略缩图  用于首页显示
@@ -10,10 +18,13 @@ public class Article {
     private String lastEditTime;//最后一次修改时间
     private String content;//文章内容
     private String category;//文章分类
-    private Integer likes;//赞
-    private Integer dislikes;//踩
+    private Integer likes;//赞   统计voteList中state为1的个数
+    private Integer dislikes;//踩 统计voteList中state为0的个数
     private User author;//作责
     private Integer state;//文章状态    [0：已删除，1：正常状态，2：已被禁止]
+    private List<Vote> voteList;
+
+    //getter & setter
 
     public String getId() {
         return id;
@@ -103,6 +114,16 @@ public class Article {
         this.state = state;
     }
 
+    public List<Vote> getVoteList() {
+        return voteList;
+    }
+
+    public void setVoteList(List<Vote> voteList) {
+        this.voteList = voteList;
+    }
+
+    //toString
+
     @Override
     public String toString() {
         return "Article{" +
@@ -117,6 +138,7 @@ public class Article {
                 ", dislikes=" + dislikes +
                 ", author=" + author +
                 ", state=" + state +
+                ", voteList=" + voteList +
                 '}';
     }
 }
