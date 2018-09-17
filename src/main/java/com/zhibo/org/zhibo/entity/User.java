@@ -15,7 +15,7 @@ public class User {
     private String summary;//用户简介，个性签名
     private String avatar;//用户头像
     private String phone;// 用户注册手机号   注册时必填
-    private Integer state;// 用户状态 [0 : 已删除,1 : 正常使用,2 : 已被封禁] 默认为1
+    private Integer state;// 用户状态 [0 : 已删除,1 : 正常使用,2 : 已被封禁,3  : 未验证] 默认为1
     private Long bannedTime;//封禁时间 无默认值
 
     public User() {
