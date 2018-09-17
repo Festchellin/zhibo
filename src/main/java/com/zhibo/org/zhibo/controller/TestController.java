@@ -14,8 +14,10 @@ public class TestController {
 
     @RequestMapping("/")
     public String getUserById(Model model){
-        User user = userMapper.getUserById(1);
-        model.addAttribute("user",user);
-        return "/user/index";
+        return "/index";
+    }
+    @RequestMapping("/user/login")
+    public String regist(Model model){
+        return "/user/login";
     }
 }
