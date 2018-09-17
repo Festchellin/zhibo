@@ -15,16 +15,39 @@ public class User {
     private String summary;
     private String avatar;
     private String phone;
+    private Integer state;
+    private Long bannedTime;
 
     public User() {
     }
 
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
+    /**
+     * @param id         自动生成
+     * @param name       用户昵称
+     * @param account    用户登录账号
+     * @param password   用户密码
+     * @param qqNum      qq登录后绑定用户账号   未实现
+     * @param wechatNum  微信登录后绑定用户账号   未实现
+     * @param email      用户邮箱 注册时验证 必填
+     * @param summary    用户简介，个性签名
+     * @param avatar     用户头像
+     * @param phone      用户注册手机号   注册时必填
+     * @param state      用户状态 [0 : 已删除,1 : 正常使用,2 : 已被封禁] 默认为1
+     * @param bannedTime 封禁时间 无默认值
+     */
+    public User(Integer id, String name, String account, String password, String qqNum, String wechatNum, String email, String summary, String avatar, String phone, Integer state, Long bannedTime) {
+        this.id = id;
+        this.name = name;
         this.account = account;
+        this.password = password;
+        this.qqNum = qqNum;
+        this.wechatNum = wechatNum;
+        this.email = email;
+        this.summary = summary;
+        this.avatar = avatar;
+        this.phone = phone;
+        this.state = state;
+        this.bannedTime = bannedTime;
     }
 
     public Integer getId() {
@@ -41,6 +64,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -99,6 +130,22 @@ public class User {
         this.phone = phone;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public Long getBannedTime() {
+        return bannedTime;
+    }
+
+    public void setBannedTime(Long bannedTime) {
+        this.bannedTime = bannedTime;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -112,6 +159,8 @@ public class User {
                 ", summary='" + summary + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", phone='" + phone + '\'' +
+                ", state=" + state +
+                ", bannedTime=" + bannedTime +
                 '}';
     }
 }
