@@ -16,6 +16,6 @@ public class TestController {
     public String getUserById(Model model){
         User user = userMapper.getUserById(1);
         model.addAttribute("user",user);
-        return "/index";
+        return "/user/index";
     }
 }
