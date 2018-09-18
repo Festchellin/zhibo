@@ -20,4 +20,9 @@ public class TestController {
     public String regist(Model model){
         return "/user/login";
     }
+
+    @RequestMapping("/uploadImg")
+    public String upload() {
+        return "/test/uploadImg";
+    }
 }
