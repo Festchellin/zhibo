@@ -25,4 +25,9 @@ public class TestController {
     public String upload() {
         return "/test/uploadImg";
     }
+
+    @RequestMapping("/user/center")
+    public String center() {
+        return "/user/center";
+    }
 }

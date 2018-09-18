@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Center</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/icon.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="/assets/js/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui container">
+    <div class="ui secondary menu">
+        <a class="ui item text" href="/"><i class="icon home grey"></i> </a>
+        <a class="ui item text" href="/"><i class="icon home grey"></i></a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item text" href="/user/login" title="登入/注册">
+                <i class="sign in alternate icon"></i>
+            </a>
+            <a class="ui item text" title="登出">
+                <i class="sign out alternate icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui vertical fluid tabular menu">
+                <a class="item" onclick="actived(this)">个人信息 </a>
+                <a class="item" onclick="actived(this)">重置密码 </a>
+                <a class="item" onclick="actived(this)">其他 </a>
+                <a class="item" onclick="actived(this)">Links </a>
+            </div>
+        </div>
+        <div class="twelve wide stretched column">
+            <div class="ui segment">这是可拉伸的网格列。此片段总是会匹配标签切换页的高度</div>
+        </div>
+    </div>
+</div>
+<script>
+    function actived(item) {
+        $("div.vertical.tabular.menu > a.item").removeClass("active");
+        $(item).addClass("active");
+    }
+</script>
+</body>
+</html>
