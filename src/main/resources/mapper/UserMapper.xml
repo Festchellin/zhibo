@@ -17,11 +17,19 @@
         SELECT * FROM user WHERE id = #{id}
     </select>
     <insert id="addUser" parameterType="UserBean">
-        insert into user(name,password,account) values(#{name},#{password},#{account})
+        insert into user(name,password,account,code) values(#{name},#{password},#{account},#{code})
     </insert>
 
     <select id="getUserByAccount" resultType="UserBean">
         select * from user WHERE account=#{account}
     </select>
+
+    <select id="getUserByCode" resultType="UserBean">
+        select * from user where code=#{code}
+    </select>
+
+    <update id="updateUserState" parameterType="UserBean">
+        update user set state=#{state} where id=#{id}
+    </update>
 
 </mapper>

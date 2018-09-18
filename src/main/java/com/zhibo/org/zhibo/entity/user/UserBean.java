@@ -17,6 +17,24 @@ public class UserBean implements Serializable {
     private String summary;
     private String avatar;
     private String phone;
+    private int state;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public Integer getId() {
         return id;

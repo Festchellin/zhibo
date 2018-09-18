@@ -33,20 +33,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean userRegister(UserBean userBean) {
         if (null == userBean || null == userBean.getPassword() || userBean.getPassword().equals("")){
-            System.out.println("为空！！");
             return false;
         }
         String md5PassWord = MD5Util.getMD5Str(userBean.getPassword());
-        System.out.println("MD5加密："+md5PassWord+userBean.getAccount());
         UserBean user = this.getUserByAccount(userBean.getAccount());
         if (null == user){
             userBean.setPassword(md5PassWord+userBean.getAccount());
             userDao.addUser(userBean);
             return true;
         }else {
-            System.out.println("找到了");
             return false;
         }
 
+    }
+
+    @Override
+    public boolean mailActivation(String code) {
+        if (null == code || code.equals("")){
+            return false;
+        }
+        UserBean user = userDao.getUserByCode(code);
+        user.setState(1);
+        userDao.updateUserState(user);
+        return true;
     }
 }

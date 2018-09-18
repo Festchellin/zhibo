@@ -31,4 +31,17 @@ public interface UserDao {
      * @return 查询到的用户 查到：返回UserBean对象 没查到：返回null;
      */
     UserBean getUserByAccount(String account);
+
+    /**
+     * 通过激活码查找用户
+     * @param code 激活码
+     * @return UserBean实体对象
+     */
+    UserBean getUserByCode(String code);
+
+    /**
+     * 根据用户修改user表中的state字段
+     * @param userBean 用户实体对象
+     */
+    void updateUserState(UserBean userBean);
 }

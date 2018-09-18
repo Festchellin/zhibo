@@ -26,4 +26,11 @@ public interface UserService {
      */
     boolean userRegister(UserBean userBean);
 
+    /**
+     * 邮件激活账号业务
+     * @param code 激活码
+     * @return 成功激活返回true,激活失败返回false
+     */
+    boolean mailActivation(String code);
+
 }
