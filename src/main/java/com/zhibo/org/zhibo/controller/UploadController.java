@@ -16,8 +16,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
-    @PostMapping("/avatar")
-    public Object uploadOneImg(MultipartFile file) {
+    /**
+     * @param file     待上传的图片
+     * @param category 图片类型 1：avatar ，2：thumbnail
+     * @return
+     */
+    @PostMapping("/image")
+    public Object uploadOneImg(MultipartFile file, Integer category) {
         Map<String, Object> map = new HashMap<>();
         if (file.isEmpty()) {
             map.put("error_code", -1);
@@ -34,8 +39,9 @@ public class UploadController {
         try {
             path = new File(ResourceUtils.getURL("classpath:").getPath());
             if (!path.exists()) path = new File("");
-            System.out.println("path:" + path.getAbsolutePath());
-            File upload = new File(path.getAbsolutePath(), "static/images/avatar/");
+            String avatar = "static/images/avatar/";
+            String thumbnail = "static/images/thumbnail";
+            File upload = new File(path.getAbsolutePath(), category == 1 ? avatar : thumbnail);
             if (!upload.exists()) upload.mkdirs();
             dest = new File(upload.getAbsolutePath() + "/" + fileName);
             if (!dest.getParentFile().exists()) {
@@ -45,7 +51,7 @@ public class UploadController {
             System.out.println(dest.getPath());
             map.put("error_code", 1);
             map.put("message", "上传成功");
-            map.put("img_url", "/images/avatar/" + fileName);
+            map.put("img_url", category == 1 ? "/images/avatar/" + fileName : "/images/thumbnail/" + fileName);
             return map;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
