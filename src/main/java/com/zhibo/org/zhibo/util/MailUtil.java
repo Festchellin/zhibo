@@ -29,7 +29,7 @@ public class MailUtil implements Runnable {
     @Override
     public void run() {
         //发件人电子邮箱
-        String from = "XX@qq.com";
+        String from = "XXX@qq.com";
         //指定发送邮件的主机
         String host = "smtp.qq.com";
 
@@ -66,9 +66,9 @@ public class MailUtil implements Runnable {
             //2.3 设置邮件主题
             message.setSubject("账号激活");
             //2.4 设置邮件内容
-            String content = "<html><head></head><body><h1>这是一封激活邮件,如果你不了解，请忽视这封邮件；如果你已经了解，激活请点击以下链接</h1><h3><a href='http://localhost:8080/mailActivation?code="
-                    + code + "'>http://localhost:8080/mailActivation?code=" + code
-                    + "</href></h3></body></html>";
+            String content = "<html><head></head><body><h1>这是一封激活邮件,如果你不了解，请忽视这封邮件；如果你已经了解，激活请点击<a href='http://localhost:8080/mailActivation?code="
+                    + code + "'>链接</a></h1><br><h3>如果链接无法使用，请将以下链接复制到浏览器进行激活： http://localhost:8080/mailActivation?code=" + code
+                    + "</h3></body></html>";
             message.setContent(content, "text/html;charset=UTF-8");
             // 3.发送邮件
             Transport.send(message);

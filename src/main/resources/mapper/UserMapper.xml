@@ -17,7 +17,7 @@
         SELECT * FROM user WHERE id = #{id}
     </select>
     <insert id="addUser" parameterType="UserBean">
-        insert into user(name,password,account,code) values(#{name},#{password},#{account},#{code})
+        insert into user(password,account,code) values(#{password},#{account},#{code})
     </insert>
 
     <select id="getUserByAccount" resultType="UserBean">

@@ -41,7 +41,7 @@ public class UserRegisterController {
             modelAndView.setViewName("index.html");
         }else {
             modelAndView.addObject("status","注册失败");
-            modelAndView.setViewName("index.html");
+            modelAndView.setViewName("user/login");
         }
         return modelAndView;
     }
@@ -62,7 +62,7 @@ public class UserRegisterController {
         boolean activation = userService.mailActivation(code);
         if (activation){
             //激活成功跳转至个人空间
-            modelAndView.setViewName("index.html");
+            modelAndView.setViewName("/index");
         }else {
             //激活失败跳转至重发激活邮件页面
             modelAndView.setViewName("index.html");

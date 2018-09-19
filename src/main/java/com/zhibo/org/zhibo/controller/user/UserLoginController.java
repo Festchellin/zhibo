@@ -26,11 +26,11 @@ public class UserLoginController {
 
         if (null == user || !md5Pass.equals(user.getPassword())){
             modelAndView.addObject("status","账号或者密码错误！");
-
+            modelAndView.setViewName("user/login");
         }else {
             modelAndView.addObject("status","登录成功");
+            modelAndView.setViewName("index");
         }
-        modelAndView.setViewName("index.html");
         return modelAndView;
     }
 
