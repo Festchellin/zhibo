@@ -25,4 +25,9 @@ public class TestController {
     public String upload() {
         return "/test/uploadImg";
     }
+
+    @RequestMapping("/uploadFile")
+    public String uploadFile(){
+        return "/test/testfileUpload";
+    }
 }

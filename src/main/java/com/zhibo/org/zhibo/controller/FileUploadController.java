@@ -4,12 +4,16 @@ import com.zhibo.org.zhibo.util.StringGenerator;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,4 +63,41 @@ public class FileUploadController {
             return map;
         }
     }
+
+    @PostMapping("/fileUpload")
+    public Object singleFileUpload(@RequestParam("file") MultipartFile file){
+        Map<String, Object> map = new HashMap<>();
+        if (file.isEmpty()) {
+            map.put("error_code", -1);
+            map.put("message", "上传失败，无文件上传");
+            return map;
+        }
+
+        try {
+            byte[] fileBytes = file.getBytes();
+            if (fileBytes.length > 1024*1024*1){
+                map.put("error_code", -1);
+                map.put("message", "上传失败!!");
+                return map;
+            }
+
+            String fileName = file.getOriginalFilename();
+            Path path = Paths.get(ResourceUtils.getURL("classpath:").getPath().substring(1)+ "static/files/" + fileName);
+
+            Files.write(path, fileBytes);
+            map.put("error_code", 1);
+            map.put("message", "上传成功");
+            map.put("files_url", "/files" + fileName);
+            return map;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            map.put("error_code", -1);
+            map.put("message", "上传失败!!");
+            return map;
+        }
+
+    }
+
+
 }
