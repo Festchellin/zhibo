@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加文章</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/icon.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/wangEditor.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="/assets/js/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui container">
+    <div class="ui secondary menu">
+        <a class="ui item text" href="/"><i class="icon home grey"></i> </a>
+        <a class="ui item text" href="/"><i class="icon home grey"></i></a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item text" href="/user/login" title="登入/注册">
+                <i class="sign in alternate icon"></i>
+            </a>
+            <a class="ui item text" title="登出">
+                <i class="sign out alternate icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui vertical fluid tabular menu">
+            </div>
+        </div>
+        <div class="twelve wide column">
+            <form action="/article" method="post" class="ui form">
+                <div class="center aligned">
+                    <div class="field">
+                        <label>标题</label>
+                        <input type="text" name="title" placeholder="请输入标题" required>
+                    </div>
+                    <div class="field">
+                        <label>分类</label>
+                        <input type="text" name="category" placeholder="请输入文章分类" required>
+                    </div>
+                    <div class="field">
+                        <label>首页显示图</label>
+                        <input type="file" id="thumbnail" accept=".jpg,.jpeg,.png">
+                        <input name="thumbnail" type="hidden">
+                        <img id="preview" width="200">
+                    </div>
+                    <div class="field">
+                        <label>内容：</label>
+                        <div id="editor" required></div>
+                    </div>
+                    <input name="content" id="content" type="hidden"></input>
+                    <button class="ui button" type="submit">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/wangEditor.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var Editor = window.wangEditor;
+        var editor = new Editor("#editor");
+        editor.customConfig.uploadImgShowBase64 = true;
+        var $content = $("#content");
+        editor.customConfig.onchange = function (html) {
+            $content.val(html)
+            console.log($content.val())
+        }
+        editor.create();
+        $content.val(editor.txt.html());
+    })
+    $(".field").on("change", "#thumbnail", function () {
+        var filePath = $(this).val();
+        if (filePath.indexOf("jpg") != -1 || filePath.indexOf("png") != -1) {
+            var imageData = document.getElementById("thumbnail").files[0];
+            var formData = new FormData();
+            formData.append("file", imageData);
+            formData.append("category", 2)
+            $.ajax({
+                type: "post",
+                url: "/upload/image",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.error_code === 1) {
+                        $("#preview").attr("src", data.img_url);
+                        $("input#content").val(data.img_url);
+                        console.log($("input#content").val())
+                    }
+                    else
+                        alert(data.message)
+                }
+            })
+        } else {
+            alert("该文件不是可用图片文件，支持格式：.jpg,.jpeg,.png")
+            $(this).val("");
+        }
+    })
+</script>
+</body>
+</html>
