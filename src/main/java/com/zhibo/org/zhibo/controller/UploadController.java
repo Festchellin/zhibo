@@ -15,8 +15,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/upload")
-public class FileUploadController {
-    @PostMapping("/oneImg")
+public class UploadController {
+    @PostMapping("/avatar")
     public Object uploadOneImg(MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         if (file.isEmpty()) {
