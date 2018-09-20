@@ -1,5 +1,6 @@
 package com.zhibo.org.zhibo.controller.user;
 
+import com.zhibo.org.zhibo.entity.User;
 import com.zhibo.org.zhibo.entity.user.UserBean;
 import com.zhibo.org.zhibo.service.user.UserService;
 import com.zhibo.org.zhibo.util.MailUtil;
@@ -25,7 +26,7 @@ public class UserRegisterController {
      * @return 返回ModelAndView
      */
     @RequestMapping("/userRegister")
-    public ModelAndView userRegister(UserBean userBean){
+    public ModelAndView userRegister(User userBean){
         //生成激活码
         String code = StringGenerator.UUIDGenerator();
         //将激活码存到数据库

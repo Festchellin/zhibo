@@ -51,4 +51,9 @@ public class TestController {
     public String uploadFile(){
         return "/test/testfileUpload";
     }
+
+    @RequestMapping("/403")
+    public String noPermission(){
+        return "/error/403";
+    }
 }

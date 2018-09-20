@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,7 +79,7 @@ public class UploadController {
 
         try {
             byte[] fileBytes = file.getBytes();
-            if (fileBytes.length > 1024*1024*1){
+            if (fileBytes.length > 1024*1024*10){
                 map.put("error_code", -1);
                 map.put("message", "上传失败!!");
                 return map;
@@ -102,6 +100,53 @@ public class UploadController {
             map.put("message", "上传失败!!");
             return map;
         }
+
+
+    }
+
+    @RequestMapping("/videoUpload")
+    public Object videoUpload(@RequestParam("file") MultipartFile file){
+        Map<String, Object> map = new HashMap<>();
+        if (file.isEmpty()) {
+            map.put("error_code", -1);
+            map.put("message", "上传失败，无文件上传");
+            return map;
+        }
+
+
+        try {
+            String filename = file.getOriginalFilename();
+            File newFile = new File(ResourceUtils.getURL("classpath:").getPath().substring(1) + "static/files/");
+            if (!newFile.exists()) {
+                newFile.mkdirs();
+            }
+            newFile = new File(newFile, filename);
+
+            FileOutputStream out = new FileOutputStream(newFile);
+            byte[] bytes = new byte[1024];
+
+
+            out.write(file.getBytes());
+            out.flush();
+            out.close();
+
+            map.put("error_code", 1);
+            map.put("message", "上传成功");
+            map.put("videos_url", "/files" + filename);
+            return map;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            map.put("error_code", -1);
+            map.put("message", "上传失败，找不到该文件夹");
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+            map.put("error_code", -1);
+            map.put("message", "上传失败!!");
+            return map;
+        }
+
 
     }
 

@@ -9,14 +9,14 @@ public interface UserService {
      * @param id 用户的唯一标识Id
      * @return 查询到的用户 查到：返回User 没查到：返回null;
      */
-    UserBean getUserById(int id);
+    User getUserById(int id);
 
     /**
      * 根据唯一标识Account查询用户
      * @param Account 唯一Account
      * @return 查询到的用户 查到：返回UserBean对象 没查到：返回null;
      */
-    UserBean getUserByAccount(String Account);
+    User getUserByAccount(String Account);
 
 
     /**
@@ -24,7 +24,7 @@ public interface UserService {
      * @param userBean 用户实体对象
      * @return 成功返回true 失败返回false
      */
-    boolean userRegister(UserBean userBean);
+    boolean userRegister(User userBean);
 
     /**
      * 邮件激活账号业务

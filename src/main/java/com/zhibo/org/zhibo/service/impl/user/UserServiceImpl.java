@@ -19,24 +19,24 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserBean getUserById(int id) {
-        UserBean user = userDao.getUserById(id);
+    public User getUserById(int id) {
+        User user = userDao.getUserById(id);
         return user;
     }
 
     @Override
-    public UserBean getUserByAccount(String account) {
-        UserBean user = userDao.getUserByAccount(account);
+    public User getUserByAccount(String account) {
+        User user = userDao.getUserByAccount(account);
         return user;
     }
 
     @Override
-    public boolean userRegister(UserBean userBean) {
+    public boolean userRegister(User userBean) {
         if (null == userBean || null == userBean.getPassword() || userBean.getPassword().equals("")){
             return false;
         }
         String md5PassWord = MD5Util.getMD5Str(userBean.getPassword());
-        UserBean user = this.getUserByAccount(userBean.getAccount());
+        User user = this.getUserByAccount(userBean.getAccount());
         if (null == user){
             userBean.setPassword(md5PassWord+userBean.getAccount());
             userDao.addUser(userBean);

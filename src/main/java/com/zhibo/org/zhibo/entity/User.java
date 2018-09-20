@@ -1,5 +1,7 @@
 package com.zhibo.org.zhibo.entity;
 
+import java.util.List;
+
 /**
  * @author dream
  * @date 2018/09/17
@@ -17,6 +19,9 @@ public class User {
     private String phone;// 用户注册手机号   注册时必填
     private Integer state;// 用户状态 [0 : 已删除,1 : 正常使用,2 : 已被封禁,3  : 未验证] 默认为1
     private Long bannedTime;//封禁时间 无默认值
+    private List<SysRole> roleList;// 一个用户具有多个角色
+    private String code;//邮件激活码
+
 
     public User() {
     }
@@ -48,6 +53,22 @@ public class User {
         this.phone = phone;
         this.state = state;
         this.bannedTime = bannedTime;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public List<SysRole> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<SysRole> roleList) {
+        this.roleList = roleList;
     }
 
     public Integer getId() {
