@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>知无不尽，博而求实</h1>
-<h1 th:text="${status}"></h1>
+
 
 <section>
     <div class="controls w3l">
@@ -20,7 +20,7 @@
     <div class="stage">
         <div class="cbImage active signin agileits">
             <h3>登录</h3>
-            <form action="/userLogin" method="post">
+            <form action="/user/login" method="post">
                 <input type="text" name="account" class="name" placeholder="账号" required>
                 <input type="password" name="password" class="password" placeholder="密码" required>
                 <input type="submit" value="登录">

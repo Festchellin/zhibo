@@ -20,7 +20,7 @@ public class TestController {
     public String getUserById(Model model){
         return "/index";
     }
-    @RequestMapping("/user/login")
+    @RequestMapping("/user/loginView")
     public String regist(Model model){
         return "/user/login";
     }

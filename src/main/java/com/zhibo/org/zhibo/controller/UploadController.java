@@ -68,7 +68,7 @@ public class UploadController {
         }
     }
 
-    @PostMapping("/fileUpload")
+    @PostMapping("/file")
     public Object singleFileUpload(@RequestParam("file") MultipartFile file){
         Map<String, Object> map = new HashMap<>();
         if (file.isEmpty()) {
@@ -104,7 +104,7 @@ public class UploadController {
 
     }
 
-    @RequestMapping("/videoUpload")
+    @RequestMapping("/video")
     public Object videoUpload(@RequestParam("file") MultipartFile file){
         Map<String, Object> map = new HashMap<>();
         if (file.isEmpty()) {
