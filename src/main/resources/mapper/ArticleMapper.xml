@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhibo.org.zhibo.mapper.article.ArticleMapper">
+    <select id="getArticleCount">
+        select count(*) from article
+    </select>
+
+    <select id="getArticle" resultType="Article" parameterType="java.util.HashMap">
+        select * from article limit #{start},#{pageCount}
+    </select>
+
+</mapper>
