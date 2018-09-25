@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhibo.org.zhibo.mapper.ReplyMapper">
+    <resultMap id="BaseMap" type="Reply">
+        <id property="id" column="id"/>
+        <association property="fromUser" column="from_uid" select="getUserById" />
+        <association property="toUser" column="to_uid" select="getUserById"/>
+    </resultMap>
+    <resultMap id="UserBaseMap" type="User">
+        <id column="id" property="id"/>
+        <result column="qq_num" property="qqNum"/>
+        <result column="wechat_num" property="wechatNum"/>
+        <result column="phone_num" property="phone"/>
+    </resultMap>
+    <resultMap id="ArticleBaseMap" type="Article">
+        <result property="uploadTime" column="upload_time"/>
+        <result property="last_edit_time" column="lastEditTime"/>
+    </resultMap>
+    <select id="getUserById" resultMap="UserBaseMap">
+        SELECT id,name,account,summary,avatar FROM USER  where id = #{id}
+    </select>
+    <select id="getArticleById" resultMap="ArticleBaseMap">
+         SELECT * FROM Article where id = #{id}
+    </select>
+    <select id="getRepliesByArticleId" resultMap="BaseMap">
+        SELECT * FROM reply WHERE id = #{arg0} limit #{arg1},#{arg2}
+    </select>
+
+    <insert id="createReply" parameterType="Reply">
+        INSERT INTO reply(id,floor,content,from_uid<if test="toUser != null ">,to_uid</if>,article_id)
+        VALUES (#{id},#{floor},#{content},#{fromUser.id} <if test="toUser != null ">,#{toUser.id}</if>,#{article.id})
+    </insert>
+    <select id="getReplyById" resultMap="BaseMap">
+        SELECT * FROM reply WHERE id = #{id}
+    </select>
+</mapper>

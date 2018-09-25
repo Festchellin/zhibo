@@ -12,9 +12,10 @@ import java.util.List;
 public class Reply implements Voteable {
     private String id = StringGenerator.UUIDGenerator();
     private String content;//回复内容
-    private Integer index;//楼层 需先获取当前文章评论的最后总数 再加一
+    private Integer floor;//楼层 需先获取当前文章评论的最后总数 再加一
     private Integer likes;//赞   统计 voteList中 state为0的个数
-    private Integer dislikse;//踩 统计 voteList中 state为0的个数
+    private Integer dislikes;//踩 统计 voteList中 state为0的个数
+    private Article article;
     private List<Vote> voteList;
     private User fromUser;  //谁回复
     private User toUser;    //谁被回复
@@ -38,12 +39,12 @@ public class Reply implements Voteable {
         this.content = content;
     }
 
-    public Integer getIndex() {
-        return index;
+    public Integer getFloor() {
+        return floor;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
+    public void setFloor(Integer floor) {
+        this.floor = floor;
     }
 
     public Integer getLikes() {
@@ -54,12 +55,20 @@ public class Reply implements Voteable {
         this.likes = likes;
     }
 
-    public Integer getDislikse() {
-        return dislikse;
+    public Integer getDislikes() {
+        return dislikes;
     }
 
-    public void setDislikse(Integer dislikse) {
-        this.dislikse = dislikse;
+    public void setDislikes(Integer dislikse) {
+        this.dislikes = dislikse;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public List<Vote> getVoteList() {
@@ -91,9 +100,10 @@ public class Reply implements Voteable {
         return "Reply{" +
                 "id='" + id + '\'' +
                 ", content='" + content + '\'' +
-                ", index=" + index +
+                ", floor=" + floor +
                 ", likes=" + likes +
-                ", dislikse=" + dislikse +
+                ", dislikse=" + dislikes +
+                ", article=" + article +
                 ", voteList=" + voteList +
                 ", fromUser=" + fromUser +
                 ", toUser=" + toUser +
