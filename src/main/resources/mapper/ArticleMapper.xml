@@ -2,12 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhibo.org.zhibo.mapper.article.ArticleMapper">
-    <select id="getArticleCount">
+    
+    <resultMap id="articleResultMap" type="Article">
+        <id property="id" column="id"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="lastEditTime" column="last_edit_time"/>
+        <association property="author" column="author_id" javaType="User" select="com.zhibo.org.zhibo.mapper.user.UserDao.getUserById"/>
+    </resultMap>
+    
+    <select id="getArticleCount" resultMap="articleResultMap">
         select count(*) from article
     </select>
 
-    <select id="getArticle" resultType="Article" parameterType="java.util.HashMap">
+    <select id="getArticle" resultType="Article" parameterType="java.util.HashMap" resultMap="articleResultMap">
         select * from article limit #{start},#{pageCount}
+    </select>
+
+    <select id="selectArticleByRand" resultType="Article" resultMap="articleResultMap">
+        SELECT * FROM article ORDER BY RAND() LIMIT #{pageCount}
+    </select>
+
+    <select id="selectArticleById" resultType="Article" parameterType="java.lang.String" resultMap="articleResultMap">
+        select * from article where id=#{articelId}
     </select>
 
 </mapper>

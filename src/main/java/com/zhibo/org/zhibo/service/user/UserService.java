@@ -33,4 +33,12 @@ public interface UserService {
      */
     boolean mailActivation(String code);
 
+    /**
+     * 更新用户信息
+     * @param user 更新用户的实体
+     * @return 更新成功后的用户实体
+     */
+    User updateUser(User user);
+
+
 }

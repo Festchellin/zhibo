@@ -45,4 +45,10 @@ public interface UserDao {
      * @param userBean 用户实体对象
      */
     void updateUserState(UserBean userBean);
+
+    /**
+     * 更新用户信息
+     * @param user 待更新用户实体
+     */
+    void updateUser(User user);
 }

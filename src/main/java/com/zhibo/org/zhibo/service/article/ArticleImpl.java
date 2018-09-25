@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+/**
+ * @author LS
+ */
 @Service
 public class ArticleImpl implements ArticleService {
     @Autowired
@@ -23,5 +26,17 @@ public class ArticleImpl implements ArticleService {
         conditionMap.put("start",start);
         conditionMap.put("pageCount",pageCount);
         return articleMapper.getArticle(conditionMap);
+    }
+
+    @Override
+    public List<Article> selectArticleByRand(int pageCount) {
+        List<Article> articleList = articleMapper.selectArticleByRand(pageCount);
+        return articleList;
+    }
+
+    @Override
+    public Article selectArticleById(String articleId) {
+        Article article = articleMapper.selectArticleById(articleId);
+        return article;
     }
 }

@@ -24,4 +24,18 @@ public interface ArticleMapper {
      * @return 文章集合
      */
     List<Article> getArticle(HashMap<String,Integer> condition);
+
+    /**
+     * 随机查询一定条数的文章
+     * @param pageCount 指定查询文章的条数
+     * @return 文章的List集合
+     */
+    List<Article> selectArticleByRand(int pageCount);
+
+    /**
+     * 根据文章ID查询文章内容
+     * @param articleId 文章ID
+     * @return 文章对象实体
+     */
+    Article selectArticleById(String articleId);
 }

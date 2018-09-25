@@ -31,16 +31,10 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        for (Article pojo : search) {
-//            System.out.println(pojo.getId()+" : "+pojo.getTitle()+" ： "+pojo.getAuthor());
-//            System.out.println(pojo.getContent());
-//            System.out.println("---------------------------------------------------------");
-//
-//        }
 
         dataMap.put("articleList",search);
 
-        responseMap.put("error_code","200");
+        responseMap.put("error_code","1");
         responseMap.put("message","查询成功！！");
         responseMap.put("data",dataMap);
 

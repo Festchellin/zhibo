@@ -22,9 +22,18 @@ public class Article implements Voteable {
     private Integer dislikes;//踩 统计voteList中state为0的个数
     private User author;//作责
     private Integer state;//文章状态    [0：已删除，1：正常状态，2：已被禁止]
-    private List<Vote> voteList;
+    private List<Reply> replys; //文章的评论
 
     //getter & setter
+
+
+    public List<Reply> getReplys() {
+        return replys;
+    }
+
+    public void setReplys(List<Reply> replys) {
+        this.replys = replys;
+    }
 
     public String getId() {
         return id;
@@ -114,13 +123,7 @@ public class Article implements Voteable {
         this.state = state;
     }
 
-    public List<Vote> getVoteList() {
-        return voteList;
-    }
 
-    public void setVoteList(List<Vote> voteList) {
-        this.voteList = voteList;
-    }
 
     //toString
 
@@ -138,7 +141,7 @@ public class Article implements Voteable {
                 ", dislikes=" + dislikes +
                 ", author=" + author +
                 ", state=" + state +
-                ", voteList=" + voteList +
+
                 '}';
     }
 }

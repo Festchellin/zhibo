@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -44,12 +45,12 @@ public class UserLoginController {
             subject.login(token);
             dataMap.put("url","/index");
             dataMap.put("token",token);
-            responseMap.put("error_code","200");
+            responseMap.put("error_code","1");
             responseMap.put("message","登录成功！！");
             responseMap.put("data",dataMap);
         }catch (Exception e){
             dataMap.put("url","/user/login");
-            responseMap.put("error_code","500");
+            responseMap.put("error_code","-1");
             responseMap.put("message","账号或者密码错误！！");
             responseMap.put("data",dataMap);
         }
@@ -85,7 +86,7 @@ public class UserLoginController {
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
         dataMap.put("url","/user/login");
-        responseMap.put("error_code","200");
+        responseMap.put("error_code","1");
         responseMap.put("message","登出成功！！");
         responseMap.put("data",dataMap);
         return responseMap;
@@ -112,12 +113,12 @@ public class UserLoginController {
             //开启一个线程发送激活邮件给注册用户
             new Thread(new MailUtil(userBean.getEmail(),code)).start();
             dataMap.put("url","/index");
-            responseMap.put("error_code","200");
+            responseMap.put("error_code","1");
             responseMap.put("message","注册成功！！");
             responseMap.put("data",dataMap);
         }else {
             dataMap.put("url","user/login");
-            responseMap.put("error_code","500");
+            responseMap.put("error_code","-1");
             responseMap.put("message","注册失败！！");
             responseMap.put("data",dataMap);
         }
@@ -135,7 +136,7 @@ public class UserLoginController {
         HashMap<String,Object> dataMap = new HashMap<>(3);
         if (null == code || code.equals("")){
             dataMap.put("url","/index");
-            responseMap.put("error_code","500");
+            responseMap.put("error_code","-1");
             responseMap.put("message","激活失败！！");
             responseMap.put("data",dataMap);
             return responseMap;
@@ -144,18 +145,35 @@ public class UserLoginController {
         if (activation){
             //激活成功跳转至个人空间
             dataMap.put("url","/index");
-            responseMap.put("error_code","200");
+            responseMap.put("error_code","1");
             responseMap.put("message","激活成功！！");
             responseMap.put("data",dataMap);
         }else {
             //激活失败跳转至重发激活邮件页面
             dataMap.put("url","/index");
-            responseMap.put("error_code","500");
+            responseMap.put("error_code","-1");
             responseMap.put("message","激活失败！！");
             responseMap.put("data",dataMap);
         }
         return responseMap;
     }
 
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object updateUser(User user){
+        HashMap<String,Object> responseMap = new HashMap<>(3);
+        HashMap<String,Object> dataMap = new HashMap<>(3);
+
+        User updateUser = userService.updateUser(user);
+
+        dataMap.put("user",updateUser);
+
+        responseMap.put("error_code","1");
+        responseMap.put("message","更新成功！！");
+        responseMap.put("data",dataMap);
+
+        return responseMap;
+
+    }
 
 }

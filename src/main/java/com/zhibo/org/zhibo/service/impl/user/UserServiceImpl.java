@@ -57,4 +57,12 @@ public class UserServiceImpl implements UserService {
         userDao.updateUserState(user);
         return true;
     }
+
+    @Override
+    public User updateUser(User user) {
+        user.setPassword(MD5Util.getMD5Str(user.getPassword())+user.getAccount());
+        userDao.updateUser(user);
+        User userById = userDao.getUserById(user.getId());
+        return userById;
+    }
 }
