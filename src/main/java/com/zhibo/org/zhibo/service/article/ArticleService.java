@@ -34,4 +34,16 @@ public interface ArticleService {
      * @return 文章对象实体
      */
     Article selectArticleById(String articleId);
+
+    /**
+     * 根据文章ID删除文章
+     * @param articleId 文章ID
+     */
+    void delectArticleById(String articleId);
+
+    /**
+     * 修改文章
+     * @param article 待修改文章的实体
+     */
+    void updateArticle(Article article);
 }

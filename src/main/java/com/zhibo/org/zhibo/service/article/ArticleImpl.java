@@ -39,4 +39,14 @@ public class ArticleImpl implements ArticleService {
         Article article = articleMapper.selectArticleById(articleId);
         return article;
     }
+
+    @Override
+    public void delectArticleById(String articleId) {
+        articleMapper.delectArticleById(articleId);
+    }
+
+    @Override
+    public void updateArticle(Article article) {
+        articleMapper.updateArticle(article);
+    }
 }

@@ -2,9 +2,9 @@ package com.zhibo.org.zhibo.controller;
 
 import com.zhibo.org.zhibo.entity.Article;
 import com.zhibo.org.zhibo.service.article.ArticleService;
+import com.zhibo.org.zhibo.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,5 +61,24 @@ public class ArticleController {
         responseMap.put("data",dataMap);
 
         return responseMap;
+    }
+
+    @DeleteMapping("/{articleId}")
+    public Object delectArticleById(@PathVariable String articleId){
+        Map map;
+
+        articleService.delectArticleById(articleId);
+        map = ResponseUtil.loadResponseWithoutData("1","删除成功");
+
+        return map;
+    }
+
+    @PutMapping
+    public Object updateArticle(Article article){
+        Map map;
+
+        articleService.updateArticle(article);
+        map = ResponseUtil.loadResponseWithoutData("1","修改成功");
+        return map;
     }
 }

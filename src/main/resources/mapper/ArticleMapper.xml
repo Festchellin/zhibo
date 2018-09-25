@@ -26,4 +26,21 @@
         select * from article where id=#{articelId}
     </select>
 
+    <delete id="delectArticleById" parameterType="java.lang.String">
+        delete from article where id=#{articleId}
+    </delete>
+
+    <update id="updateArticle" parameterType="Article">
+        update article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != null and title !=''">title=#{title},</if>
+            <if test="thumbnail != null and thumbnail !=''">thumbnail=#{thumbnail},</if>
+            <if test="uploadTime != null and uploadTime !=''">upload_time=#{uploadTime},</if>
+            <if test="lastEditTime != null and lastEditTime !=''">last_edit_time=#{lastEditTime},</if>
+            <if test="content != null and content !=''">content=#{content},</if>
+            <if test="category != null and category !=''">category=#{category},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
 </mapper>
