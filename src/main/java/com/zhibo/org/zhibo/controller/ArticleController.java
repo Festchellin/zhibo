@@ -6,6 +6,7 @@ import com.zhibo.org.zhibo.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,15 @@ public class ArticleController {
 
         articleService.updateArticle(article);
         map = ResponseUtil.loadResponseWithoutData("1","修改成功");
+        return map;
+    }
+
+    @PostMapping
+    public Object createArticle(Article article){
+        Map map;
+
+        articleService.createArticle(article);
+        map = ResponseUtil.loadResponseWithoutData("1","文章创建成功");
         return map;
     }
 }

@@ -45,12 +45,12 @@ public class TestController {
         return "/article/add";
     }
 
-    @PostMapping("/article")
-    @ResponseBody
-    public Object addArticle(Article article) {
-        System.out.println(article);
-        return "OK";
-    }
+//    @PostMapping("/article")
+////    @ResponseBody
+////    public Object addArticle(Article article) {
+////        System.out.println(article);
+////        return "OK";
+////    }
 
     @RequestMapping("/uploadFile")
     public String uploadFile(){

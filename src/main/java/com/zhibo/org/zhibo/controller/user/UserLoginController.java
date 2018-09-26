@@ -98,6 +98,7 @@ public class UserLoginController {
      */
     @PostMapping("/register")
     public Object userRegister(@RequestBody User userBean){
+        System.out.println("+++++++++++++"+userBean.getAccount()+"------"+userBean.getPassword());
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
         //生成激活码
