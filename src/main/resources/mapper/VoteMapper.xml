@@ -5,21 +5,28 @@
 
     <resultMap id="voteResultMap" type="Vote">
         <id property="id" column="id"/>
-        <result property="voteTime" column="voteTime"/>
+        <result property="voteTime" column="vote_time"/>
         <result property="voter.id" column="voter_id"/>
     </resultMap>
 
     <update id="likeAndDislikeArticle" parameterType="Vote">
         update vote,article
         <trim prefix="set" suffixOverrides=",">
-            <if test="voteTime != null and voteTime != ''">vote.voteTime=#{voteTime},</if>
-            <if test="states == -1">vote.state=#{states},article.like=article.like-1</if>
+            <if test="voteTime != null and voteTime != ''">vote.vote_time=#{voteTime},</if>
+            <if test="states == -1">vote.state=#{states},article.dislikes=article.dislikes+1,article.likes=article.likes-1,</if>
+            <if test="states == 1">vote.state=#{states},article.likes=article.likes+1,article.dislikes=article.dislikes-1,</if>
         </trim>
-        where id=#{id}
+        where vote.id=#{id} and vote.article_id = article.id
     </update>
 
     <insert id="firstAppraisalArticle" parameterType="Vote">
-
+        insert into vote(id,vote_time,voter_id,state,article_id) values (#{id},#{voteTime},#{voter.id},#{states},#{articleId})
     </insert>
+
+    <select id="findVoteByUserId" parameterType="Vote" resultType="Vote">
+        select * from vote where voter_id=#{voter.id}
+    </select>
+
+
 
 </mapper>

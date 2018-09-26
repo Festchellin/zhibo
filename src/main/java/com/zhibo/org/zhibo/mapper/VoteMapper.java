@@ -24,4 +24,11 @@ public interface VoteMapper {
      */
     void firstAppraisalArticle(Vote vote);
 
+    /**
+     * 根据用户的唯一标识ID查找该用户是否有点赞或差评操作
+     * @param vote 点赞或差评操作实体对象
+     * @return 点赞或差评操作实体对象
+     */
+    Vote findVoteByUserId(Vote vote);
+
 }

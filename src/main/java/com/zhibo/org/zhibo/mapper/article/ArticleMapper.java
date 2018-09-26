@@ -55,4 +55,17 @@ public interface ArticleMapper {
      * 创建文章
      */
     void createArticle(Article article);
+
+    /**
+     * 根据文章的Id查询文章的点赞和差评总数
+     * @param articleId 文章ID
+     * @return 文章类实体对象
+     */
+    Article findLikesAndDislikesByArticleId(String articleId);
+
+    /**
+     * 设置该文章的点赞总数和差评总数
+     * @param article 文章实体对象
+     */
+    void setLikesAndDislikes(Article article);
 }
