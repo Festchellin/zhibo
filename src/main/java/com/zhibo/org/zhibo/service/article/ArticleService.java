@@ -46,4 +46,10 @@ public interface ArticleService {
      * @param article 待修改文章的实体
      */
     void updateArticle(Article article);
+
+    /**
+     * 创建文章
+     * @param article 文章实体
+     */
+    void createArticle(Article article);
 }

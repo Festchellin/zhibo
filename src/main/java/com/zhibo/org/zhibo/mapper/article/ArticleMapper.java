@@ -50,4 +50,9 @@ public interface ArticleMapper {
      * @param article 待修改文章的实体
      */
     void updateArticle(Article article);
+
+    /**
+     * 创建文章
+     */
+    void createArticle(Article article);
 }

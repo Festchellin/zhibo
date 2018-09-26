@@ -2,9 +2,11 @@ package com.zhibo.org.zhibo.service.article;
 
 import com.zhibo.org.zhibo.entity.Article;
 import com.zhibo.org.zhibo.mapper.article.ArticleMapper;
+import com.zhibo.org.zhibo.util.StringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 /**
@@ -48,5 +50,12 @@ public class ArticleImpl implements ArticleService {
     @Override
     public void updateArticle(Article article) {
         articleMapper.updateArticle(article);
+    }
+
+    @Override
+    public void createArticle(Article article) {
+        article.setId(StringGenerator.UUIDGenerator());
+
+        articleMapper.createArticle(article);
     }
 }

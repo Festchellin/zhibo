@@ -43,4 +43,8 @@
         where id=#{id}
     </update>
 
+    <insert id="createArticle"  parameterType="Article">
+        insert into article(id, title, thumbnail, upload_time, last_edit_time, category, content, author_id) values (#{id},#{title},#{thumbnail},#{uploadTime},#{lastEditTime},#{category},#{content},#{author.id})
+    </insert>
+
 </mapper>
