@@ -67,10 +67,10 @@ public class ReplyController {
         }
         return map;
     }
-    @PutMapping("/{id}")
-    public Object updateReplyById(@PathVariable String id,Reply reply){
+    @PutMapping()
+    public Object updateReplyById(Reply reply){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Boolean result = replyService.updateReplyById(id,reply);
+        Boolean result = replyService.updateReplyById(reply);
         Map map;
         if (result){
             map = ResponseUtil.loadResponseWithoutData("1", "修改回复成功");

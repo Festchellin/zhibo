@@ -17,10 +17,10 @@
         <result property="last_edit_time" column="lastEditTime"/>
     </resultMap>
     <select id="getUserById" resultMap="UserBaseMap">
-        SELECT id,name,account,summary,avatar FROM USER  where id = #{id}
+        SELECT id,name,account,summary,avatar FROM USER  where id = #{id} AND state = 1
     </select>
     <select id="getArticleById" resultMap="ArticleBaseMap">
-         SELECT * FROM Article where id = #{id}
+         SELECT * FROM Article where id = #{id} AND state = 1
     </select>
     <select id="getRepliesByArticleId" resultMap="BaseMap">
         SELECT * FROM reply WHERE id = #{arg0} limit #{arg1},#{arg2}
@@ -31,6 +31,16 @@
         VALUES (#{id},#{floor},#{content},#{fromUser.id} <if test="toUser != null ">,#{toUser.id}</if>,#{article.id})
     </insert>
     <select id="getReplyById" resultMap="BaseMap">
-        SELECT * FROM reply WHERE id = #{id}
+        SELECT * FROM reply WHERE id = #{id} AND state = 1
+    </select>
+
+    <update id="updateReplyById" parameterType="Reply">
+        UPDATE reply SET content = #{content} WHERE id = #{id}
+    </update>
+    <update id="deleteReplyById">
+        UPDATE reply SET state = 0 WHERE id = #{id}
+    </update>
+    <select id="getCurrentArticleMaxFloor" resultType="Integer">
+        SELECT MAX(floor) as maxFloor FROM reply WHERE article_id = #{articleId} AND state = 1
     </select>
 </mapper>

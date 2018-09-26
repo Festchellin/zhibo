@@ -2,19 +2,15 @@ package com.zhibo.org.zhibo.controller;
 
 import com.zhibo.org.zhibo.entity.Article;
 import com.zhibo.org.zhibo.entity.Reply;
-import com.zhibo.org.zhibo.entity.User;
-import com.zhibo.org.zhibo.mapper.ReplyMapper;
 import com.zhibo.org.zhibo.mapper.UserMapper;
 import com.zhibo.org.zhibo.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class TestController {
     @Autowired
     private UserMapper userMapper;
@@ -22,11 +18,11 @@ public class TestController {
     private ReplyService replyService;
 
     @RequestMapping("/")
-    public String getUserById(Model model){
+    public String getUserById(){
         return "/index";
     }
     @RequestMapping("/user/loginView")
-    public String regist(Model model){
+    public String regist(){
         return "/user/login";
     }
 
@@ -46,7 +42,6 @@ public class TestController {
     }
 
     @PostMapping("/article")
-    @ResponseBody
     public Object addArticle(Article article) {
         System.out.println(article);
         return "OK";
@@ -62,7 +57,6 @@ public class TestController {
         return "/error/403";
     }
     @RequestMapping("/reply/article/{id}")
-    @ResponseBody
     public Object testReply(@PathVariable String id, @Nullable Integer page, @Nullable Integer size){
         List<Reply> repliesByArticleId = replyService.getRepliesByArticleId(id,page,size);
         for (Reply reply : repliesByArticleId) {
