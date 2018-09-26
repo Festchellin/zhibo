@@ -48,14 +48,14 @@
     </insert>
 
     <select id="findLikesAndDislikesByArticleId" parameterType="java.lang.String" resultType="Article">
-        select likes,dislikes from article where author_id=#{id}
+        select id,likes,dislikes from article where id=#{articleId}
     </select>
 
     <update id="setLikesAndDislikes" parameterType="Article">
         update article
         <trim prefix="set" suffixOverrides=",">
-            <if test="likes != null and likes != ''">likes=#{likes}</if>
-            <if test="dislikes != null and dislikes != ''">dislikes=#{dislikes}</if>
+            <if test="likes != null and likes != ''">likes=#{likes},</if>
+            <if test="dislikes != null and dislikes != ''">dislikes=#{dislikes},</if>
         </trim>
         where id=#{id}
     </update>

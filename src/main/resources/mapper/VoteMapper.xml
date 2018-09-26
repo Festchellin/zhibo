@@ -7,6 +7,8 @@
         <id property="id" column="id"/>
         <result property="voteTime" column="vote_time"/>
         <result property="voter.id" column="voter_id"/>
+        <result property="states" column="state"/>
+        <result property="articleId" column="article_id"/>
     </resultMap>
 
     <update id="likeAndDislikeArticle" parameterType="Vote">
@@ -23,10 +25,22 @@
         insert into vote(id,vote_time,voter_id,state,article_id) values (#{id},#{voteTime},#{voter.id},#{states},#{articleId})
     </insert>
 
-    <select id="findVoteByUserId" parameterType="Vote" resultType="Vote">
+    <select id="findVoteByUserId" parameterType="Vote" resultType="Vote" resultMap="voteResultMap">
         select * from vote where voter_id=#{voter.id}
     </select>
 
+    <update id="cancleVote" parameterType="Vote">
+        update vote set state=#{states} where id=#{id}
+    </update>
 
+    <update id="changToLikesOrDisLikes" parameterType="Vote">
+        update vote,article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="voteTime != null and voteTime != ''">vote.vote_time=#{voteTime},</if>
+            <if test="states == -1">vote.state=#{states},article.dislikes=article.dislikes+1,</if>
+            <if test="states == 1">vote.state=#{states},article.likes=article.likes+1,</if>
+        </trim>
+        where vote.id=#{id} and vote.article_id = article.id
+    </update>
 
 </mapper>
