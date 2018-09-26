@@ -28,7 +28,7 @@ public class UserLoginController {
      public UserService userService;
 
     @PostMapping("/login")
-    public Object userLogin(User userBean){
+    public Object userLogin(User userBean,boolean rememberMe){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
         //对参数中的密码进行加密、加盐
@@ -36,11 +36,15 @@ public class UserLoginController {
         // 从SecurityUtils里边创建一个 subject
         Subject subject = SecurityUtils.getSubject();
         // 在认证提交前准备 token（令牌）
-        UsernamePasswordToken token = new UsernamePasswordToken(userBean.getAccount(),md5Pass);
+        UsernamePasswordToken token = new UsernamePasswordToken(userBean.getAccount(),md5Pass,rememberMe);
 
         // 执行认证登陆
         try {
             subject.login(token);
+            User user = userService.getUserByAccount(userBean.getAccount());
+            user.setPassword("");
+            user.setCode("");
+            dataMap.put("user",user);
             dataMap.put("url","/index");
             dataMap.put("token",token);
             responseMap.put("error_code","1");

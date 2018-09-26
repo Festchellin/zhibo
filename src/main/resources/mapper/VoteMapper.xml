@@ -5,7 +5,21 @@
 
     <resultMap id="voteResultMap" type="Vote">
         <id property="id" column="id"/>
-        <result property="voteTime" column="vote_time"/>
+        <result property="voteTime" column="voteTime"/>
+        <result property="voter.id" column="voter_id"/>
     </resultMap>
+
+    <update id="likeAndDislikeArticle" parameterType="Vote">
+        update vote,article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="voteTime != null and voteTime != ''">vote.voteTime=#{voteTime},</if>
+            <if test="states == -1">vote.state=#{states},article.like=article.like-1</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <insert id="firstAppraisalArticle" parameterType="Vote">
+
+    </insert>
 
 </mapper>

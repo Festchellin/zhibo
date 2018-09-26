@@ -8,10 +8,20 @@ package com.zhibo.org.zhibo.entity;
  */
 public class Vote {
     private Integer id;
+    private String articleId;   //点赞或差评的文章ID
     private String voteTime;    //赞或踩的时间
-    private Integer states;     //[0：踩，1：赞]
+    private Integer states;     //[-1：差评，1：赞]
     private User voter;         //投票者
     private Voteable voteObject;    //投票对象：Article or Reply
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
     public Integer getId() {
         return id;
     }
