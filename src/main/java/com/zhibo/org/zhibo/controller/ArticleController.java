@@ -23,7 +23,7 @@ public class ArticleController {
      * 随机查询一定条数的文章
      * @return
      */
-    @RequestMapping("/select")
+    @GetMapping
     public Object findArticle(){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
@@ -47,8 +47,8 @@ public class ArticleController {
      * @param articleId 文章ID
      * @return
      */
-    @RequestMapping("/selectById")
-    public Object findArticleById(String articleId){
+    @GetMapping("/{articleId}")
+    public Object findArticleById(@PathVariable String articleId){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
 

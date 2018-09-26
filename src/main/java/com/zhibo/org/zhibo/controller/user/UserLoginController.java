@@ -11,9 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -29,7 +27,7 @@ public class UserLoginController {
     @Autowired
      public UserService userService;
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Object userLogin(User userBean){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
@@ -77,7 +75,7 @@ public class UserLoginController {
         return responseMap;
     }
 
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     public Object logout() {
         System.out.println("开始注销》》》");
         Subject subject = SecurityUtils.getSubject();
@@ -98,7 +96,7 @@ public class UserLoginController {
      * @param userBean 用于接收参数
      * @return 返回ModelAndView
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public Object userRegister(@RequestBody User userBean){
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
@@ -158,7 +156,7 @@ public class UserLoginController {
         return responseMap;
     }
 
-    @RequestMapping("/update")
+    @PutMapping
     @ResponseBody
     public Object updateUser(User user){
         HashMap<String,Object> responseMap = new HashMap<>(3);

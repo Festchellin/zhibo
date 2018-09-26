@@ -3,6 +3,7 @@ package com.zhibo.org.zhibo.controller;
 import com.zhibo.org.zhibo.entity.Article;
 import com.zhibo.org.zhibo.service.search.SearchArticleService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/search")
 public class SearchController {
 
-    @RequestMapping("/article")
+    @GetMapping
     public Object findArticleByKey( String keyWord){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
