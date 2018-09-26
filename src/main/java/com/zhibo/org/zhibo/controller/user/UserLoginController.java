@@ -21,7 +21,7 @@ import java.util.Map;
  * @author ls
  * @date 2018/9/21
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserLoginController {
     @Autowired
@@ -97,8 +97,7 @@ public class UserLoginController {
      * @return 返回ModelAndView
      */
     @PostMapping("/register")
-    public Object userRegister(@RequestBody User userBean){
-        System.out.println("+++++++++++++"+userBean.getAccount()+"------"+userBean.getPassword());
+    public Object userRegister(User userBean){
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
         //生成激活码
