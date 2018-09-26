@@ -4,8 +4,12 @@ import com.zhibo.org.zhibo.entity.Article;
 import com.zhibo.org.zhibo.entity.Vote;
 import com.zhibo.org.zhibo.mapper.VoteMapper;
 import com.zhibo.org.zhibo.mapper.article.ArticleMapper;
+import com.zhibo.org.zhibo.util.StringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 赞和踩的业务逻辑实现类
@@ -21,10 +25,16 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public void likeAndDislikeArticle(Vote vote) {
+        //获取当前系统时间
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        vote.setVoteTime(format.format(new Date()));
+
         //通过用户ID查找该用户是否对该文章进行评价
         Vote voteByUserId = voteMapper.findVoteByUserId(vote);
         if (null == voteByUserId){
             //没找到，则该用户没有进行评价，在评价表中新添加一个记录
+            //生成UUID，作为该条记录的唯一标识ID
+            vote.setId(StringGenerator.UUIDGenerator());
             voteMapper.firstAppraisalArticle(vote);
             //通过文章的唯一标识ID查询该文章的点赞和差评总数
             Article article = articleMapper.findLikesAndDislikesByArticleId(vote.getArticleId());
@@ -38,6 +48,9 @@ public class VoteServiceImpl implements VoteService {
             articleMapper.setLikesAndDislikes(article);
         }else {
             //找到vote记录，说明该用户已经进行过评价
+            //将查询到的评价唯一标识ID设置给要修改的评价
+            vote.setId(voteByUserId.getId());
+
             if (0 == vote.getStates() && 0 != voteByUserId.getStates()){
                 //用户进行取消操作
                 //查询该文章的点赞和差评总数
@@ -70,5 +83,10 @@ public class VoteServiceImpl implements VoteService {
             }
         }
 
+    }
+
+    @Override
+    public Vote findVoteByUserId(Vote vote) {
+        return voteMapper.findVoteByUserId(vote);
     }
 }

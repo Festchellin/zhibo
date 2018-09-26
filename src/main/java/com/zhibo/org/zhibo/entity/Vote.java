@@ -1,5 +1,7 @@
 package com.zhibo.org.zhibo.entity;
 
+import com.zhibo.org.zhibo.util.StringGenerator;
+
 /**
  * @author dream
  * @date 2018/09/17
@@ -7,7 +9,7 @@ package com.zhibo.org.zhibo.entity;
  * 投票实体类（用于 赞/踩 功能）
  */
 public class Vote {
-    private Integer id;
+    private String id;
     private String articleId;   //点赞或差评的文章ID
     private String voteTime;    //赞或踩的时间
     private Integer states;     //[-1：差评，1：赞]
@@ -22,11 +24,11 @@ public class Vote {
         this.articleId = articleId;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

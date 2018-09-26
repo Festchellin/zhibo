@@ -13,4 +13,11 @@ public interface VoteService {
      * @param vote 点赞或差评实体对象
      */
     void likeAndDislikeArticle(Vote vote);
+
+    /**
+     * 通过用户ID查询该用户的点赞或差评状态
+     * @param vote 点赞或差评的实体对象
+     * @return 点赞或差评的实体对象
+     */
+    Vote findVoteByUserId(Vote vote);
 }
