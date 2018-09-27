@@ -31,5 +31,18 @@
     <update id="updateUserState" parameterType="User">
         update user set state=#{state} where id=#{id}
     </update>
-
+    <update id="updateUser" parameterType="User">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name !=''">name=#{name},</if>
+            <if test="password != null and password !=''">password=#{password},</if>
+            <if test="qqNum != null and qqNum !=''">qq_num=#{qqNum},</if>
+            <if test="wechatNum != null and wechatNum !=''">wechat_num=#{wechatNum},</if>
+            <if test="email != null and email !=''">email=#{email},</if>
+            <if test="summary != null and summary !=''">summary=#{summary},</if>
+            <if test="avatar != null and avatar !=''">avatar=#{avatar},</if>
+            <if test="phone != null and phone !=''">phone_num=#{phone},</if>
+        </trim>
+        where id=#{id}
+    </update>
 </mapper>
