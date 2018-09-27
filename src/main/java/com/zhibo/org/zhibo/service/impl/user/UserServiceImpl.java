@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         if (null == code || code.equals("")){
             return false;
         }
-        UserBean user = userDao.getUserByCode(code);
+        User user = userDao.getUserByCode(code);
         user.setState(1);
         userDao.updateUserState(user);
         return true;

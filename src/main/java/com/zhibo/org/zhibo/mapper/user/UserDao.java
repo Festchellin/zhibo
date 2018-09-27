@@ -38,13 +38,13 @@ public interface UserDao {
      * @param code 激活码
      * @return UserBean实体对象
      */
-    UserBean getUserByCode(String code);
+    User getUserByCode(String code);
 
     /**
      * 根据用户修改user表中的state字段
      * @param userBean 用户实体对象
      */
-    void updateUserState(UserBean userBean);
+    void updateUserState(User userBean);
 
     /**
      * 更新用户信息
