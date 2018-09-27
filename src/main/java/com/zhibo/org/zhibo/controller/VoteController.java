@@ -36,7 +36,7 @@ public class VoteController {
             map = ResponseUtil.loadResponseWithData("1","差评成功!!",state);
 
         }else {
-            map = ResponseUtil.loadResponseWithData("1","操作失败！！",state);
+            map = ResponseUtil.loadResponseWithData("-1","操作失败！！",state);
 
         }
         return map;
