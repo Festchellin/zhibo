@@ -11,7 +11,7 @@
         <result property="qqNum" column="qq_num"/>
         <result property="wechatNum" column="wechat_num"/>
         <result property="summary" column="summary"/>
-        <result property="avatar" column="summary"/>
+        <result property="avatar" column="avatar"/>
         <result property="phone" column="phone_num"/>
     </resultMap>
     <select id="getUserById" resultMap="UserMap">
@@ -21,11 +21,11 @@
         insert into user(password,account,code,email) values(#{password},#{account},#{code},#{email})
     </insert>
 
-    <select id="getUserByAccount" resultType="User">
+    <select id="getUserByAccount" resultMap="UserMap">
         select * from user WHERE account=#{account}
     </select>
 
-    <select id="getUserByCode" resultType="UserBean">
+    <select id="getUserByCode" resultMap="UserMap">
         select * from user where code=#{code}
     </select>
 
@@ -36,7 +36,7 @@
         update user
         <trim prefix="set" suffixOverrides=",">
             <if test="name != null and name !=''">name=#{name},</if>
-            <if test="password != null and password !=''">password=#{password},</if>
+            <!--<if test="password != null and password !=''">password=#{password},</if>-->
             <if test="qqNum != null and qqNum !=''">qq_num=#{qqNum},</if>
             <if test="wechatNum != null and wechatNum !=''">wechat_num=#{wechatNum},</if>
             <if test="email != null and email !=''">email=#{email},</if>

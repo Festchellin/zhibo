@@ -102,7 +102,7 @@ public class UserLoginController {
      * @return 返回ModelAndView
      */
     @PostMapping("/register")
-    public Object userRegister(User userBean){
+    public Object userRegister(@RequestBody User userBean){
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
         //生成激活码
