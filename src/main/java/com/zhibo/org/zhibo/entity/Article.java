@@ -2,6 +2,7 @@ package com.zhibo.org.zhibo.entity;
 
 import com.zhibo.org.zhibo.util.StringGenerator;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * 文章实体类
  */
-public class Article implements Voteable {
+public class Article implements Voteable,Serializable {
     private String id= StringGenerator.UUIDGenerator();//id
     private String title;//标题
     private String thumbnail;//文章略缩图  用于首页显示

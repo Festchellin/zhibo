@@ -1,12 +1,13 @@
 package com.zhibo.org.zhibo.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author dream
  * @date 2018/09/17
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String name;//用户昵称
     private String account;//用户登录账号
