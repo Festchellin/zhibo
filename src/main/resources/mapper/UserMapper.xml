@@ -17,7 +17,7 @@
         SELECT * FROM user WHERE id = #{id}
     </select>
     <insert id="addUser" parameterType="User">
-        insert into user(password,account,code) values(#{password},#{account},#{code})
+        insert into user(password,account,code,email) values(#{password},#{account},#{code},#{email})
     </insert>
 
     <select id="getUserByAccount" resultType="User">

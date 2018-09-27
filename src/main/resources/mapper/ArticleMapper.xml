@@ -47,4 +47,17 @@
         insert into article(id, title, thumbnail, upload_time, last_edit_time, category, content, author_id) values (#{id},#{title},#{thumbnail},#{uploadTime},#{lastEditTime},#{category},#{content},#{author.id})
     </insert>
 
+    <select id="findLikesAndDislikesByArticleId" parameterType="java.lang.String" resultType="Article">
+        select id,likes,dislikes from article where id=#{articleId}
+    </select>
+
+    <update id="setLikesAndDislikes" parameterType="Article">
+        update article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="likes != null and likes != ''">likes=#{likes},</if>
+            <if test="dislikes != null and dislikes != ''">dislikes=#{dislikes},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
 </mapper>
