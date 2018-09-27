@@ -65,4 +65,14 @@ public class UserServiceImpl implements UserService {
         User userById = userDao.getUserById(user.getId());
         return userById;
     }
+
+    @Override
+    public boolean judgmentExistUser(User user) {
+        User userByAccount = userDao.getUserByAccount(user.getAccount());
+        if (null == userByAccount){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

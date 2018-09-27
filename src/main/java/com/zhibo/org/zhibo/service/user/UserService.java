@@ -40,5 +40,12 @@ public interface UserService {
      */
     User updateUser(User user);
 
+    /**
+     * 判断账号是否已经有人注册
+     * @param user 用户对象实体
+     * @return 账号已被注册，返回true; 账号未被注册，返回false;
+     */
+    boolean judgmentExistUser(User user);
+
 
 }

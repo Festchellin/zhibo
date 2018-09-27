@@ -5,6 +5,7 @@ import com.zhibo.org.zhibo.entity.user.UserBean;
 import com.zhibo.org.zhibo.service.user.UserService;
 import com.zhibo.org.zhibo.util.MD5Util;
 import com.zhibo.org.zhibo.util.MailUtil;
+import com.zhibo.org.zhibo.util.ResponseUtil;
 import com.zhibo.org.zhibo.util.StringGenerator;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -180,5 +181,23 @@ public class UserLoginController {
         return responseMap;
 
     }
+
+    /**
+     * 判断账号是否已被注册
+     * @param user 用户对象实体对象
+     * @return
+     */
+    @PostMapping("/judgmentExistUser")
+    public Object judgmentExistUser(@RequestBody User user){
+        Map map;
+        boolean existUser = userService.judgmentExistUser(user);
+        if (existUser){
+            map = ResponseUtil.loadResponseWithoutData("-1","账号已被注册！！");
+        }else {
+            map = ResponseUtil.loadResponseWithoutData("1","账号可以进行注册！！");
+        }
+        return map;
+    }
+
 
 }
