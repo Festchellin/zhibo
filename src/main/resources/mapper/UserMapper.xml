@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhibo.org.zhibo.mapper.user.UserDao">
+    <cache type="com.zhibo.org.zhibo.service.RedisCache"/>
     <resultMap id="UserMap" type="com.zhibo.org.zhibo.entity.User">
         <id property="id" column="id"/>
         <result property="name" column="name"/>

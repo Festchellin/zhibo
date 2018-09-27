@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhibo.org.zhibo.mapper.permission.RoleMapper">
-
-    <select id="getRoleByAccount" resultType="java.lang.String">
+    <cache type="com.zhibo.org.zhibo.service.RedisCache"/>
+    <select id="getRoleByAccount" resultType="java.lang.String" flushCache="true">
         select role from sys_roles r,sys_user_role ur,user u where u.id=ur.user_id
          and r.id=ur.role_id and u.account=#{account}
     </select>
 
-    <select id="getPermissionByRole" resultType="java.lang.String">
+    <select id="getPermissionByRole" resultType="java.lang.String" flushCache="true">
         select permission from sys_roles r,sys_permission p,sys_role_permission rp where
           r.id=rp.role_id and p.id=rp.permission_id and r.role=#{role}
     </select>

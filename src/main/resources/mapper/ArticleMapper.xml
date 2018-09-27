@@ -23,7 +23,7 @@
         SELECT * FROM article ORDER BY RAND() LIMIT #{pageCount}
     </select>
 
-    <select id="selectArticleById" resultType="Article" parameterType="java.lang.String" resultMap="articleResultMap">
+    <select id="selectArticleById" resultType="Article" parameterType="java.lang.String" resultMap="articleResultMap" flushCache="true">
         select * from article where id=#{articelId}
     </select>
 

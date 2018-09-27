@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhibo.org.zhibo.mapper.ReplyMapper">
+    <cache type="com.zhibo.org.zhibo.service.RedisCache"/>
     <resultMap id="BaseMap" type="Reply">
         <id property="id" column="id"/>
         <association property="fromUser" column="from_uid" select="getUserById" />
@@ -16,13 +17,13 @@
         <result property="uploadTime" column="upload_time"/>
         <result property="last_edit_time" column="lastEditTime"/>
     </resultMap>
-    <select id="getUserById" resultMap="UserBaseMap">
+    <select id="getUserById" resultMap="UserBaseMap" flushCache="true">
         SELECT id,name,account,summary,avatar FROM USER  where id = #{id} AND state = 1
     </select>
-    <select id="getArticleById" resultMap="ArticleBaseMap">
+    <select id="getArticleById" resultMap="ArticleBaseMap" flushCache="true">
          SELECT * FROM Article where id = #{id} AND state = 1
     </select>
-    <select id="getRepliesByArticleId" resultMap="BaseMap">
+    <select id="getRepliesByArticleId" resultMap="BaseMap" flushCache="true">
         SELECT * FROM reply WHERE id = #{arg0} limit #{arg1},#{arg2}
     </select>
 
@@ -40,7 +41,7 @@
     <update id="deleteReplyById">
         UPDATE reply SET state = 0 WHERE id = #{id}
     </update>
-    <select id="getCurrentArticleMaxFloor" resultType="Integer">
+    <select id="getCurrentArticleMaxFloor" resultType="Integer" flushCache="true">
         SELECT MAX(floor) as maxFloor FROM reply WHERE article_id = #{articleId} AND state = 1
     </select>
 </mapper>
