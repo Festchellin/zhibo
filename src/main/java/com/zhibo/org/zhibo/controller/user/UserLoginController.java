@@ -118,6 +118,7 @@ public class UserLoginController {
             //开启一个线程发送激活邮件给注册用户
             new Thread(new MailUtil(userBean.getEmail(),code)).start();
             User userByAccount = userService.getUserByAccount(userBean.getAccount());
+            userByAccount.setPassword("");
             dataMap.put("user",userByAccount);
             dataMap.put("url","/index");
             responseMap.put("error_code","1");
