@@ -28,9 +28,10 @@ public class UserLoginController {
      public UserService userService;
 
     @PostMapping("/login")
-    public Object userLogin(User userBean,boolean rememberMe){
+    public Object userLogin(@RequestBody User userBean,boolean rememberMe){
         Map<String,Object> responseMap = new HashMap<>(3);
         Map<String,Object> dataMap = new HashMap<>(3);
+        System.out.println(rememberMe);
         //对参数中的密码进行加密、加盐
         String md5Pass = MD5Util.getMD5Str(userBean.getPassword()) + userBean.getAccount();
         // 从SecurityUtils里边创建一个 subject
@@ -161,8 +162,7 @@ public class UserLoginController {
     }
 
     @PutMapping
-    @ResponseBody
-    public Object updateUser(User user){
+    public Object updateUser(@RequestBody User user){
         HashMap<String,Object> responseMap = new HashMap<>(3);
         HashMap<String,Object> dataMap = new HashMap<>(3);
 

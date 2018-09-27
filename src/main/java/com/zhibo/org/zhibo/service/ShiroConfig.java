@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * @author LS
  */
-//@Configuration
+@Configuration
 public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {

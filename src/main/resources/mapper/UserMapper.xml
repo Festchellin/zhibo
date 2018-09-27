@@ -10,10 +10,10 @@
         <result property="qqNum" column="qq_num"/>
         <result property="wechatNum" column="wechat_num"/>
         <result property="summary" column="summary"/>
-        <result property="avatar" column="avatar"/>
+        <result property="avatar" column="summary"/>
         <result property="phone" column="phone_num"/>
     </resultMap>
-    <select id="getUserById" resultMap="UserMap" resultType="User">
+    <select id="getUserById" resultMap="UserMap">
         SELECT * FROM user WHERE id = #{id}
     </select>
     <insert id="addUser" parameterType="User">
@@ -24,7 +24,7 @@
         select * from user WHERE account=#{account}
     </select>
 
-    <select id="getUserByCode" resultType="User">
+    <select id="getUserByCode" resultType="UserBean">
         select * from user where code=#{code}
     </select>
 
