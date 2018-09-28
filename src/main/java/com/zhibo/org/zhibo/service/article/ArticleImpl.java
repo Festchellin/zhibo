@@ -58,7 +58,7 @@ public class ArticleImpl implements ArticleService {
 
     @Override
     public void createArticle(Article article) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm;ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         article.setLastEditTime(format.format(new Date()));
         article.setUploadTime(format.format(new Date()));
         article.setId(StringGenerator.UUIDGenerator());

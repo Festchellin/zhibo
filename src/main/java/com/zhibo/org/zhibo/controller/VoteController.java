@@ -25,9 +25,8 @@ public class VoteController {
         Map map;
         voteService.likeAndDislikeArticle(vote);
         Vote vote1 = voteService.findVoteByUserId(vote);
-        int stateValue = vote1.getStates();
-        Map<String,Integer> state = new HashMap<>(1);
-        state.put("newState",stateValue);
+        Map<String,Object> state = new HashMap<>(1);
+        state.put("newState",vote1);
         if (1 == vote.getStates()){
             map = ResponseUtil.loadResponseWithData("1","点赞成功!!",state);
         }else if(0 == vote.getStates()){
