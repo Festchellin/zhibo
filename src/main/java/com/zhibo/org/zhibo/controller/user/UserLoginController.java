@@ -201,7 +201,7 @@ public class UserLoginController {
         return map;
     }
 
-    @PostMapping("/loginByToken")
+    @PostMapping("/login/Token")
     public Object loginByToken(@RequestBody UsernamePasswordToken token){
         Map map;
         Subject subject = SecurityUtils.getSubject();
@@ -210,7 +210,9 @@ public class UserLoginController {
             String username = token.getUsername();
             User userByAccount = userService.getUserByAccount(username);
             userByAccount.setPassword("");
-            map = ResponseUtil.loadResponseWithData("1","登录成功",userByAccount);
+            Map<String,Object> userMap = new HashMap<>(1);
+            userMap.put("user",userByAccount);
+            map = ResponseUtil.loadResponseWithData("1","登录成功",userMap);
         }catch (Exception e){
             map = ResponseUtil.loadResponseWithoutData("1","登录失败！！");
         }
