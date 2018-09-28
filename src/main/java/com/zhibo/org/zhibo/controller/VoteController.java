@@ -4,10 +4,7 @@ import com.zhibo.org.zhibo.entity.Vote;
 import com.zhibo.org.zhibo.service.vote.VoteService;
 import com.zhibo.org.zhibo.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +40,8 @@ public class VoteController {
         return map;
     }
 
-    @PostMapping("/list")
-    public Object findListVoteByUserId(String voterId){
+    @PostMapping("/{voterId}")
+    public Object findListVoteByUserId(@PathVariable String voterId){
         Map map;
         List<Vote> listVoteByUserId = voteService.findListVoteByUserId(voterId);
         map = ResponseUtil.loadResponseWithData("1","查询成功！！",listVoteByUserId);
