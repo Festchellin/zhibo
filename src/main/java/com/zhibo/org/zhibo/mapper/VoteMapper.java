@@ -4,6 +4,8 @@ import com.zhibo.org.zhibo.entity.Vote;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 点赞和踩功能的数据库操作
  * @author LS
@@ -42,5 +44,12 @@ public interface VoteMapper {
      * @param vote 点赞或差评实体对象
      */
     void changToLikesOrDisLikes(Vote vote);
+
+    /**
+     * 查询该用户所有的点赞
+     * @param voterId 用户唯一标识ID
+     * @return vote的List集合
+     */
+    List<Vote> findListVoteByUserId(String voterId);
 
 }

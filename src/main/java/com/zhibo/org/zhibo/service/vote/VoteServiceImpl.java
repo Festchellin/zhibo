@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 赞和踩的业务逻辑实现类
@@ -87,6 +88,13 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Vote findVoteByUserId(Vote vote) {
+
         return voteMapper.findVoteByUserId(vote);
+    }
+
+    @Override
+    public List<Vote> findListVoteByUserId(String voterId) {
+        return voteMapper.findListVoteByUserId(voterId);
+
     }
 }

@@ -26,7 +26,7 @@
     </insert>
 
     <select id="findVoteByUserId" parameterType="Vote" resultType="Vote" resultMap="voteResultMap">
-        select * from vote where voter_id=#{voter.id}
+        select * from vote where voter_id=#{voter.id} and article_id=#{articleId}
     </select>
 
     <update id="cancleVote" parameterType="Vote">
@@ -42,5 +42,9 @@
         </trim>
         where vote.id=#{id} and vote.article_id = article.id
     </update>
+
+    <select id="findListVoteByUserId" parameterType="java.lang.String" resultType="Vote" resultMap="voteResultMap">
+        select * from vote where voter_id=#{voterId}
+    </select>
 
 </mapper>
