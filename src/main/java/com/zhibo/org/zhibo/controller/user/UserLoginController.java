@@ -201,5 +201,21 @@ public class UserLoginController {
         return map;
     }
 
+    @PostMapping("/loginByToken")
+    public Object loginByToken(@RequestBody UsernamePasswordToken token){
+        Map map;
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            String username = token.getUsername();
+            User userByAccount = userService.getUserByAccount(username);
+            userByAccount.setPassword("");
+            map = ResponseUtil.loadResponseWithData("1","登录成功",userByAccount);
+        }catch (Exception e){
+            map = ResponseUtil.loadResponseWithoutData("1","登录失败！！");
+        }
+        return map;
+    }
+
 
 }
