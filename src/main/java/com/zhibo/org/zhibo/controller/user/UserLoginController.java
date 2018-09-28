@@ -201,7 +201,7 @@ public class UserLoginController {
         return map;
     }
 
-    @PostMapping("/login/Token")
+    @PostMapping("/login/token")
     public Object loginByToken(@RequestBody UsernamePasswordToken token){
         Map map;
         Subject subject = SecurityUtils.getSubject();
