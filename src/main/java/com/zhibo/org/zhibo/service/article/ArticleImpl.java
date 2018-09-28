@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 /**
@@ -49,11 +51,16 @@ public class ArticleImpl implements ArticleService {
 
     @Override
     public void updateArticle(Article article) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        article.setLastEditTime(format.format(new Date()));
         articleMapper.updateArticle(article);
     }
 
     @Override
     public void createArticle(Article article) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm;ss");
+        article.setLastEditTime(format.format(new Date()));
+        article.setUploadTime(format.format(new Date()));
         article.setId(StringGenerator.UUIDGenerator());
 
         articleMapper.createArticle(article);
