@@ -1,12 +1,14 @@
 package com.zhibo.org.zhibo.controller;
 
 import com.zhibo.org.zhibo.entity.Article;
+import com.zhibo.org.zhibo.entity.User;
 import com.zhibo.org.zhibo.service.article.ArticleService;
 import com.zhibo.org.zhibo.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +33,8 @@ public class ArticleController {
 
         //每次查询的条数
         int pageCount = 10;
-
-        List<Article> articleList = articleService.selectArticleByRand(pageCount);
+        List<Article> articleList;
+            articleList = articleService.selectArticleByRand(pageCount);
         System.out.println("长度："+articleList.size());
         dataMap.put("articleList",articleList);
 
@@ -86,7 +88,7 @@ public class ArticleController {
     @PostMapping
     public Object createArticle(Article article){
         Map map;
-
+        System.out.println(article);
         articleService.createArticle(article);
         map = ResponseUtil.loadResponseWithoutData("1","文章创建成功");
         return map;

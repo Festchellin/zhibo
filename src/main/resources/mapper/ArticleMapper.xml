@@ -55,8 +55,8 @@
     <update id="setLikesAndDislikes" parameterType="Article">
         update article
         <trim prefix="set" suffixOverrides=",">
-            <if test="likes != null and likes != ''">likes=#{likes},</if>
-            <if test="dislikes != null and dislikes != ''">dislikes=#{dislikes},</if>
+            <if test="likes != null and likes != '' or likes == 0 ">likes=#{likes},</if>
+            <if test="dislikes != null and dislikes != '' or dislikes == 0 ">dislikes=#{dislikes},</if>
         </trim>
         where id=#{id}
     </update>

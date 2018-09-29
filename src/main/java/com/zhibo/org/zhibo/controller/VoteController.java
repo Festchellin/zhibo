@@ -20,8 +20,9 @@ public class VoteController {
     public VoteService voteService;
 
     @PutMapping
-    public Object likeAndDislikeAction(Vote vote){
+    public Object likeAndDislikeAction(@RequestBody Vote vote){
         Map map;
+        System.out.println(vote);
         voteService.likeAndDislikeArticle(vote);
         Vote vote1 = voteService.findVoteByUserId(vote);
         Map<String,Object> state = new HashMap<>(1);
@@ -32,7 +33,6 @@ public class VoteController {
             map = ResponseUtil.loadResponseWithData("1","取消成功!!",state);
         }else if (-1 == vote.getStates()){
             map = ResponseUtil.loadResponseWithData("1","差评成功!!",state);
-
         }else {
             map = ResponseUtil.loadResponseWithData("-1","操作失败！！",state);
 
@@ -40,11 +40,12 @@ public class VoteController {
         return map;
     }
 
-    @PostMapping("/{voterId}")
+    @PostMapping("/list/{voterId}")
     public Object findListVoteByUserId(@PathVariable String voterId){
-        Map map;
+        Map<String,Object> data = new HashMap<>();
         List<Vote> listVoteByUserId = voteService.findListVoteByUserId(voterId);
-        map = ResponseUtil.loadResponseWithData("1","查询成功！！",listVoteByUserId);
+        data.put("voteList",listVoteByUserId);
+        Map map = ResponseUtil.loadResponseWithData("1", "查询成功！！", data);
         return map;
     }
 }

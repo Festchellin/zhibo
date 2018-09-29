@@ -56,6 +56,7 @@ public class VoteServiceImpl implements VoteService {
                 //用户进行取消操作
                 //查询该文章的点赞和差评总数
                 Article article = articleMapper.findLikesAndDislikesByArticleId(vote.getArticleId());
+                System.out.println(article);
                 //如果当前状态为差评，则差评总数减一；如果当前状态为点赞，则点赞总数减一；
                 if (-1 == voteByUserId.getStates()){
                     article.setDislikes(article.getDislikes()-1);
@@ -63,6 +64,7 @@ public class VoteServiceImpl implements VoteService {
                 }else if (1 == voteByUserId.getStates()){
                     article.setLikes(article.getLikes()-1);
                 }
+                System.out.println(article);
                 //将新的点赞或差评总数进行更新
                 articleMapper.setLikesAndDislikes(article);
                 //将评价状态改为无评价状态

@@ -6,11 +6,12 @@ import com.zhibo.org.zhibo.util.StringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
+import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 /**
  * @author LS
  */
@@ -25,15 +26,15 @@ public class ArticleImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> getArticle(Integer start,Integer pageCount) {
-        HashMap<String,Integer> conditionMap = new HashMap<>(2);
-        conditionMap.put("start",start);
-        conditionMap.put("pageCount",pageCount);
+    public List<Article> getArticle(Integer start, Integer pageCount) {
+        HashMap<String, Integer> conditionMap = new HashMap<>(2);
+        conditionMap.put("start", start);
+        conditionMap.put("pageCount", pageCount);
         return articleMapper.getArticle(conditionMap);
     }
 
     @Override
-    public List<Article> selectArticleByRand(int pageCount) {
+    public List<Article> selectArticleByRand(int pageCount){
         List<Article> articleList = articleMapper.selectArticleByRand(pageCount);
         return articleList;
     }

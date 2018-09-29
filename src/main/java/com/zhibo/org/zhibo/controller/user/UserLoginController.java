@@ -124,7 +124,13 @@ public class UserLoginController {
             responseMap.put("error_code","1");
             responseMap.put("message","注册成功！！");
             responseMap.put("data",dataMap);
-
+            //对参数中的密码进行加密、加盐
+            //String md5Pass = MD5Util.getMD5Str(userBean.getPassword()) + userBean.getAccount();
+            // 从SecurityUtils里边创建一个 subject
+            //Subject subject = SecurityUtils.getSubject();
+            // 在认证提交前准备 token（令牌）
+            //UsernamePasswordToken token = new UsernamePasswordToken(userBean.getAccount(),md5Pass,true);
+            //subject.login(token);
         }else {
             dataMap.put("url","user/login");
             responseMap.put("error_code","-1");
@@ -205,6 +211,7 @@ public class UserLoginController {
     public Object loginByToken(@RequestBody UsernamePasswordToken token){
         Map map;
         Subject subject = SecurityUtils.getSubject();
+        System.out.println(token.getUsername()+""+token.getPassword());
         try {
             subject.login(token);
             String username = token.getUsername();

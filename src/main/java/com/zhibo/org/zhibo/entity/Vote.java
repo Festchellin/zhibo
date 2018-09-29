@@ -2,17 +2,19 @@ package com.zhibo.org.zhibo.entity;
 
 import com.zhibo.org.zhibo.util.StringGenerator;
 
+import java.io.Serializable;
+
 /**
  * @author dream
  * @date 2018/09/17
  *
  * 投票实体类（用于 赞/踩 功能）
  */
-public class Vote {
+public class Vote implements Serializable {
     private String id;
     private String articleId;   //点赞或差评的文章ID
     private String voteTime;    //赞或踩的时间
-    private Integer states;     //[-1：差评，1：赞]
+    private Integer states;     //[-1：差评，0:取消赞，1：赞]
     private User voter;         //投票者
     private Voteable voteObject;    //投票对象：Article or Reply
 

@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
+
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         System.out.println("ShiroConfiguration.shirFilter()");
@@ -28,6 +29,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/assets/**", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
+        filterChainDefinitionMap.put("/user/mailActivation", "anon");
+        filterChainDefinitionMap.put("/article", "anon");
+        filterChainDefinitionMap.put("/images/avatar/*", "anon");
+        filterChainDefinitionMap.put("/images/thumbnail/*", "anon");
         //filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/uploadFile", "roles[admin]");
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
