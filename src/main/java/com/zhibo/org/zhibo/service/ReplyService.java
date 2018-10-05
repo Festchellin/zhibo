@@ -20,15 +20,10 @@ public class ReplyService {
     /**
      * 根据文章id获取其回复
      * @param articleId 文章id
-     * @param start 分页开始
-     * @param limit 每页大小
      * @return  该文章回复按分页的list
      */
-    public List<Reply> getRepliesByArticleId(String articleId, @Nullable Integer start, @Nullable Integer limit){
-        start = start == null || start <= 0 ? 0 : start;
-        limit = limit == null || limit <= 0 ? 5 : limit;
-        System.out.println(start+":"+limit);
-        List<Reply> replies = replyMapper.getRepliesByArticleId(articleId, start, limit);
+    public List<Reply> getRepliesByArticleId(String articleId){
+        List<Reply> replies = replyMapper.getRepliesByArticleId(articleId);
         return replies;
     }
 
@@ -48,8 +43,8 @@ public class ReplyService {
      * @return  是否更新成功（true/false）
      */
     public Boolean createReply(Reply reply) {
-        Integer maxFloor = replyMapper.getCurrentArticleMaxFloor(reply.getArticle().getId() + "".trim());
-        reply.setFloor(maxFloor+1);
+        Integer maxFloor = replyMapper.getCurrentArticleMaxFloor(reply.getArticle().getId());
+        reply.setFloor(maxFloor == null ? 1 : maxFloor+1);
         System.out.println(reply);
         return replyMapper.createReply(reply);
     }

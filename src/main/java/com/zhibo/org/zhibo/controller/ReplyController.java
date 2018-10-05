@@ -33,19 +33,24 @@ public class ReplyController {
     }
 
     @GetMapping("/article/{id}")
-    public Object getRepliesByArticleId(@PathVariable String id, @Nullable Integer start,@Nullable Integer limit){
-        List<Reply> replyList = replyService.getRepliesByArticleId(id, start, limit);
+    public Object getRepliesByArticleId(@PathVariable String id){
+        List<Reply> replyList = replyService.getRepliesByArticleId(id);
+        for (Reply reply : replyList) {
+            System.out.println(reply);
+        }
+        Map data = new HashMap();
         Map map;
+        data.put("replyList",replyList);
         if (replyList != null){
-            map = ResponseUtil.loadResponseWithData("1", "获取文章回复成功",replyList);
+            map = ResponseUtil.loadResponseWithData("1", "获取文章回复成功",data);
         }else {
             map = ResponseUtil.loadResponseWithoutData("-1", "获取文章回复失败");
         }
 
         return map;
     }
-    @PostMapping()
-    public Object createReply(Reply reply){
+    @PostMapping
+    public Object createReply(@RequestBody Reply reply){
         System.out.println(reply);
         Boolean result = replyService.createReply(reply);
         Map map;

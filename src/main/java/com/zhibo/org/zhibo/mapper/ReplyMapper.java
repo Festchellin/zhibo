@@ -20,7 +20,7 @@ public interface ReplyMapper {
      * @param limit 每页大小
      * @return  该文章回复按分页的list
      */
-    public List<Reply> getRepliesByArticleId(String article_id,Integer start,Integer limit);
+    public List<Reply> getRepliesByArticleId(String article_id);
 
     /**
      * 根据id获取回复

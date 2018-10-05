@@ -2,6 +2,7 @@ package com.zhibo.org.zhibo.entity;
 
 import com.zhibo.org.zhibo.util.StringGenerator;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @date 2018/09/17
  * 回复实体类
  */
-public class Reply implements Voteable {
+public class Reply implements Voteable, Serializable {
     private String id = StringGenerator.UUIDGenerator();
     private String content;//回复内容
     private Integer floor;//楼层 需先获取当前文章评论的最后总数 再加一

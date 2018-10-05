@@ -4,8 +4,13 @@
     <cache type="com.zhibo.org.zhibo.service.RedisCache"/>
     <resultMap id="BaseMap" type="Reply">
         <id property="id" column="id"/>
+        <result property="content" column="content"/>
+        <result property="likes" column="likes"/>
+        <result property="dislikes" column="dislikes"/>
+        <result property="floor" column="floor"/>
         <association property="fromUser" column="from_uid" select="getUserById" />
         <association property="toUser" column="to_uid" select="getUserById"/>
+        <association property="article" column="article_id" select="getArticleById"/>
     </resultMap>
     <resultMap id="UserBaseMap" type="User">
         <id column="id" property="id"/>
@@ -24,7 +29,7 @@
          SELECT * FROM Article where id = #{id} AND state = 1
     </select>
     <select id="getRepliesByArticleId" resultMap="BaseMap" flushCache="true">
-        SELECT * FROM reply WHERE id = #{arg0} limit #{arg1},#{arg2}
+        SELECT * FROM reply WHERE article_id = #{articleId} ORDER BY floor
     </select>
 
     <insert id="createReply" parameterType="Reply">
