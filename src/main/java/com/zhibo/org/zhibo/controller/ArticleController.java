@@ -46,6 +46,33 @@ public class ArticleController {
     }
 
     /**
+     * 分页查询用户的文章
+     * @param userId 用户唯一标识ID
+     * @param pageNum 当前页
+     * @param pageSize 每页显示的条数
+     * @return 查询到的文章集合
+     */
+    @GetMapping("/{userId}")
+    public Object getArticleByUserId(@PathVariable Integer userId,Integer pageNum,Integer pageSize){
+        Map map;
+        if (userId == null){
+            map = ResponseUtil.loadResponseWithoutData("-1","传递的参数为空！！");
+            return map;
+        }
+
+        pageNum = pageNum == null ? 1 : pageNum;
+        pageSize = pageSize == null ? 10 : pageSize;
+
+        List<Article> articleList = articleService.getArticleByUserId(userId, pageNum, pageSize);
+
+        Map<String,List<Article>> dateMap = new HashMap<>(1);
+        dateMap.put("文章列表",articleList);
+        map = ResponseUtil.loadResponseWithData("1","查询成功！！",dateMap);
+        return map;
+
+    }
+
+    /**
      * 通过文章ID查询文章内容
      * @param articleId 文章ID
      * @return

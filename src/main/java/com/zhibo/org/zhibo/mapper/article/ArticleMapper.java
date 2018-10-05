@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -68,4 +69,11 @@ public interface ArticleMapper {
      * @param article 文章实体对象
      */
     void setLikesAndDislikes(Article article);
+
+    /**
+     * 根据用户ID查询该用户的文章
+     * @param dataMap 参数的Map集合
+     * @return 文章集合
+     */
+    List<Article> getArticleByUserId(Map<String,Integer> dataMap);
 }

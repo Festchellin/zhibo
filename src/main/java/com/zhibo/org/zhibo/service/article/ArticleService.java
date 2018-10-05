@@ -53,4 +53,13 @@ public interface ArticleService {
      * @param article 文章实体
      */
     void createArticle(Article article);
+
+    /**
+     * 根据用户ID查询该用户的文章
+     * @param userId 用户的唯一标识ID
+     * @param pageNum 当前页码
+     * @param pageSize 每页显示的文章数
+     * @return 文章集合
+     */
+    List<Article> getArticleByUserId(int userId,Integer pageNum,Integer pageSize);
 }

@@ -61,4 +61,8 @@
         where id=#{id}
     </update>
 
+    <select id="getArticleByUserId" resultType="Article" parameterType="java.util.Map" resultMap="articleResultMap">
+        SELECT * FROM article WHERE author_id=#{userId} LIMIT #{start},#{pageSize}
+    </select>
+
 </mapper>

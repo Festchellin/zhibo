@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author LS
@@ -65,5 +66,16 @@ public class ArticleImpl implements ArticleService {
         article.setId(StringGenerator.UUIDGenerator());
 
         articleMapper.createArticle(article);
+    }
+
+    @Override
+    public List<Article> getArticleByUserId(int userId, Integer pageNum, Integer pageSize) {
+        Integer start = (pageNum-1) * pageSize;
+        Map<String,Integer> dataMap = new HashMap<>(3);
+        dataMap.put("userId",userId);
+        dataMap.put("start",start);
+        dataMap.put("pageSize",pageSize);
+        List<Article> articleList = articleMapper.getArticleByUserId(dataMap);
+        return articleList;
     }
 }
